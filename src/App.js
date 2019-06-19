@@ -5,8 +5,10 @@ export default class App extends Component {
     render() {
         return (
             <Fragment>
-                <TodoHeader />
-                <TodoInput />
+                <TodoHeader desc="今日事,今日毕">
+                    待办事项列表
+                </TodoHeader>
+                <TodoInput btnText="ADD"/>
                 <TodoList />
             </Fragment>
         )
