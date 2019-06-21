@@ -31,13 +31,23 @@ export default class App extends Component {
         }
     }
 
+    addTodo = (todoTitle) => {
+        this.setState({
+            todos:this.state.todos.concat({
+                id:Math.random(),
+                title: todoTitle,
+                isCompleted: false
+
+            })
+        })
+    }
     render() {
         return (
             <Fragment>
                 <TodoHeader desc={this.state.desc}>
                     {this.state.title}
                 </TodoHeader>
-                <TodoInput btnText="ADD"/>
+                <TodoInput addTodo={this.addTodo}/>
                 <TodoList todos={this.state.todos}/>
                 <Like />
             </Fragment>

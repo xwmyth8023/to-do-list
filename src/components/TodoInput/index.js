@@ -9,10 +9,33 @@ export default class TodoInput extends Component {
         btnText: '添加TODO'
     }
 
+    constructor () {
+        super()
+        this.state = {
+            inputValue:''
+        }
+    }
+
+    handleInputChange = (e) => {
+        this.setState({
+            inputValue: e.currentTarget.value
+        })
+    }
+
+    handleAddClick = () => {
+        console.log(this.state)
+        this.props.addTodo(this.state.inputValue)
+    }
+
     render() {
         return (
             <Fragment>
-                <input type='text' placeholder='请输入要添加的事项'></input><button>{this.props.btnText}</button>
+                <input 
+                    type='text' 
+                    value={this.state.inputValue} 
+                    onChange={this.handleInputChange} 
+                />
+                <button onClick={this.handleAddClick}>{this.props.btnText}</button>
             </Fragment>
         )
     }
