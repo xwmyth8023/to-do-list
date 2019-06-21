@@ -9,7 +9,8 @@ export default class TodoList extends Component {
             id:PropType.number.isRequired,
             title:PropType.string.isRequired,
             isCompleted:PropType.bool.isRequired
-        })).isRequired
+        })).isRequired,
+        onSelectTodoItem:PropType.func
     }
 
     render() {
@@ -20,6 +21,7 @@ export default class TodoList extends Component {
                     this.props.todos.map(todo => {
                         return (
                             <TodoItem 
+                                onSelectTodoItem={this.props.onSelectTodoItem}
                                 key={todo.id}
                                 {...todo}
                                 // id = {todo.id}

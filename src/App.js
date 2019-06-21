@@ -2,9 +2,6 @@ import React, { Component,Fragment } from 'react'
 import {TodoHeader,TodoInput,TodoList,Like} from './components'
 
 export default class App extends Component {
-    // state = {
-    //     title:'待办事项列表'
-    // }
 
     constructor(){
         super()
@@ -31,6 +28,21 @@ export default class App extends Component {
         }
     }
 
+    onSelectTodoItem = (id) => {
+        // console.log('comlete select')
+        this.setState((prevState) => {
+            return {
+                todos: prevState.todos.map(todo => {
+                    
+                    if(todo.id === id){
+                        todo.isCompleted = !todo.isCompleted
+                    }
+                    return todo
+                })
+            }
+        })
+    }
+
     addTodo = (todoTitle) => {
         this.setState({
             todos:this.state.todos.concat({
@@ -48,7 +60,7 @@ export default class App extends Component {
                     {this.state.title}
                 </TodoHeader>
                 <TodoInput addTodo={this.addTodo}/>
-                <TodoList todos={this.state.todos}/>
+                <TodoList todos={this.state.todos} onSelectTodoItem={this.onSelectTodoItem}/>
                 <Like />
             </Fragment>
         )
