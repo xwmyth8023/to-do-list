@@ -7,7 +7,7 @@ export default class TodoItem extends Component {
         this.props.onSelectTodoItem && this.props.onSelectTodoItem(this.props.id)
     }
     shouldComponentUpdate (nextProps,nextState) {
-        return nextProps.isCompleted !== this.props.isCompleted
+        return nextProps.completed !== this.props.completed
     }
     render() {
         console.log(`Todoitem ${this.props.title} rendered`)
@@ -15,10 +15,10 @@ export default class TodoItem extends Component {
             <li>
                 <input 
                     type='checkbox'
-                    checked={this.props.isCompleted}
+                    checked={this.props.completed}
                     onChange={this.handleSlectTodo}
                 />
-                {this.props.title} {this.props.isCompleted ? '已完成' : '未完成'}
+                {this.props.title} {this.props.completed ? '已完成' : '未完成'}
             </li>
         )
     }

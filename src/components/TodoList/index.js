@@ -8,7 +8,7 @@ export default class TodoList extends Component {
         todos:PropType.arrayOf(PropType.shape({
             id:PropType.number.isRequired,
             title:PropType.string.isRequired,
-            isCompleted:PropType.bool.isRequired
+            completed:PropType.bool.isRequired
         })).isRequired,
         onSelectTodoItem:PropType.func
     }

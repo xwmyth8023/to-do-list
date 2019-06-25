@@ -1,5 +1,7 @@
 import React, { Component,Fragment } from 'react'
 import {TodoHeader,TodoInput,TodoList,Like} from './components'
+import { getTodos } from './server'
+import { PassThrough } from 'stream';
 
 export default class App extends Component {
 
@@ -8,23 +10,7 @@ export default class App extends Component {
         this.state = {
             title:'待办事项列表',
             desc:'今日事,今日毕',
-            todos:[
-                {
-                    id:1,
-                    title:'吃饭',
-                    isCompleted:true
-                },
-                {
-                    id:2,
-                    title:'睡觉',
-                    isCompleted:false
-                },
-                {
-                    id:3,
-                    title:'打豆豆',
-                    isCompleted:false
-                }
-            ]
+            todos:[]
         }
     }
 
@@ -35,7 +21,7 @@ export default class App extends Component {
                 todos: prevState.todos.map(todo => {
                     
                     if(todo.id === id){
-                        todo.isCompleted = !todo.isCompleted
+                        todo.completed = !todo.completed
                     }
                     return todo
                 })
@@ -43,12 +29,32 @@ export default class App extends Component {
         })
     }
 
+    componentDidMount () {
+        getTodos()
+            .then(resp => {
+                console.log(resp)
+                if (resp.status===200) {
+                    this.setState({
+                        todos:resp.data
+                    })
+                }else{
+                    //
+                }
+            })
+            .catch(err =>{
+                console.log(err)
+            })
+            .finally(()=>{
+                //
+            })
+    }
+
     addTodo = (todoTitle) => {
         this.setState({
             todos:this.state.todos.concat({
                 id:Math.random(),
                 title: todoTitle,
-                isCompleted: false
+                completed: false
 
             })
         })
