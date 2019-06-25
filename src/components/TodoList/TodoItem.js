@@ -6,8 +6,11 @@ export default class TodoItem extends Component {
         // console.log('changed')
         this.props.onSelectTodoItem && this.props.onSelectTodoItem(this.props.id)
     }
-
+    shouldComponentUpdate (nextProps,nextState) {
+        return nextProps.isCompleted !== this.props.isCompleted
+    }
     render() {
+        console.log(`Todoitem ${this.props.title} rendered`)
         return (
             <li>
                 <input 
